@@ -34,16 +34,16 @@ In this hands-on lab, you will learn how to:
 The following is required to complete this hands-on lab:
 
 - [Visual Studio Express 2012 for Web][1] or greater.
-- [ASP.NET MVC 4][3].
-- [Windows Azure Tools for Microsoft Visual Studio 1.7][4].
+- [ASP.NET MVC 4][2].
+- [Windows Azure Tools for Microsoft Visual Studio 1.7][3].
+- [Windows Azure PowerShell CmdLets][4].
 - IIS 7 (with ASP.NET, WCF HTTP Activation).
-- [Windows Azure PowerShell CmdLets][5].
 - A Windows Azure subscription - [sign up for a free trial](http://aka.ms/WATK-FreeTrial).
 
 [1]:http://www.microsoft.com/visualstudio/
-[3]:http://www.asp.net/mvc/mvc4
-[4]:http://www.microsoft.com/windowsazure/sdk/
-[5]:http://msdn.microsoft.com/en-us/library/windowsazure/jj156055
+[2]:http://www.asp.net/mvc/mvc4
+[3]:http://www.microsoft.com/windowsazure/sdk/
+[4]:http://msdn.microsoft.com/en-us/library/windowsazure/jj156055
 
 > **Note:** This lab was designed for Windows 8.
 
@@ -89,7 +89,7 @@ In this exercise, you deploy the myTODO application to Windows Azure using the W
 
 The application you deploy in this exercise requires a Cloud Service and a Storage Account. In this task, you create a new storage account to allow the application to persist its data. In addition, you define a Cloud Service to host your web application.
 
-1. Navigate to [http://manage.windowsazure.com/](http://manage.windowsazure.com) using a Web browser and sign in using the Microsoft Account associated with your Windows Azure account.
+1. Navigate to [http://manage.windowsazure.com](http://manage.windowsazure.com) using a Web browser and sign in using the Microsoft Account associated with your Windows Azure account.
 
 	![Signing in to the Windows Azure Management portal](Images/signing-in-to-the-windows-azure-platform-mana.png?raw=true)
 
@@ -329,7 +329,7 @@ In this task, you run the application in the staging environment and access its 
 
 	_Running the application in the staging environment_
 
-	>**Note:** The address URL is shown as _\<guid\>.azurewebsites.net_, where \<_guid_\> is some random identifier. This is different from the address where the application will run once it is in production. Although the application executes in a staging area that is separate from the production environment, there is no actual physical difference between staging and production – it is simply a matter of where the load balancer is connected.
+	>**Note:** The address URL is shown as _\<guid\>.cloudapp.net_, where \<_guid_\> is some random identifier. This is different from the address where the application will run once it is in production. Although the application executes in a staging area that is separate from the production environment, there is no actual physical difference between staging and production – it is simply a matter of where the load balancer is connected.
 	
 	>**Note:** In the future, you will be able to have multiple “virtual” areas, for test, QA, pre-production, etc... 
 
@@ -508,10 +508,6 @@ In the previous exercise, you uploaded the service package for the myTODO applic
 
 	>**Important:** The **New-AzureDeployment** cmdlet assumes that the compute service and storage service names are the same. If this is not the case, specify an additional parameter -**StorageServicename \<YOUR_SERVICE_NAME_LOWER_CASE\>**, replacing the placeholder with the name of the storage service name.
 
-	![New Azure Deployment Command Line](Images/new-azure-deployment-command-line.png?raw=true "New Azure Deployment Command Line")
-
-	_New-AzureDeployment Command Line_
-
 1. Press **ENTER** to execute the command and wait until the **New-AzureDeployment** command finishes.
 
 	![Deploying a new service package to Windows Azure using PowerShell](Images/command-line-deploying-powershell.png?raw=true "Deploying a new service package to Windows Azure using PowerShell")
@@ -629,9 +625,23 @@ In this task, you update the storage connection strings to point to your Storage
 
 	>**Note:** This is the same solution deployed earlier except for a legend in its footer area to indicate that it was deployed using **Visual Studio**.
 
-1. In **Solution Explorer**, expand the **Roles** node inside the **MyTodo** cloud project and then double-click the **MyTodo.WebUx** role.
+1. In **Solution Explorer**, expand the **Roles** node in the **MyTodo** project, double-click the **MyTodo.WebUx** role to open its properties window, and then switch to the **Settings** tab.
 
-1. In the **MyTodo.WebUx \[Role\]** window, switch to the **Settings** tab and configure the necessary Storage account details replacing [YOUR\_ACCOUNT\_NAME] with the name of your storage account and [YOUR\_ACCOUNT\_KEY] with the shared key. Do this for both _DataConnectionString_ and _Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString_ settings. These are the same values that you used in previous exercises to configure the application.
+1. Configure the storage account connection strings. To do this, expand the **Roles** node in the **MyTodo** project and double-click the **MyTodo.WebUX** role. In the role properties window, select the **Settings** tab, select the _DataConnectionString_ setting, ensure that the **Type** is set to Connection String, and then click the button labeled with an ellipsis.
+
+	![Defining storage account connection settings](Images/defining-connection-settings.png?raw=true "Defining storage account connection settings")
+
+	_Defining storage account connection settings_
+
+1. In the **Storage Account Connection String** dialog, select the **Enter storage credentials** option. Complete your storage **Account Name** and storage **Account Key** and click **OK**.
+
+	![Configuring the storage account name and account key](Images/defining-connection-settings-2.png?raw=true "Configuring the storage account name and account key")
+
+	_Configuring the storage account name and account key_
+
+	>**Note:** This information is available in the **Dashboard** section of your storage account in the Windows Azure Management Portal. You used the same settings in Exercise 1, when you deployed and configured the application. In that instance, because you were running the application in Windows Azure, you updated the configuration at the Management Portal. 
+
+1. Repeat the previous steps to configure the _Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString_ setting using the same account information.
 
 1. Press **CTRL + S** to save your changes. 
 
@@ -673,7 +683,7 @@ Then, you will use these credentials to publish the MyTODO application directly 
 	>**Note:** Although this is not covered in this lab, the IntelliTrace option enables you to capture detailed trace logs of your running service in the cloud that you can download to your desktop to perform historical debugging. This can be invaluable when troubleshooting issues that occur during role start up. Note that IntelliTrace requires the .NET Framework 4 and it is only available in Visual Studio Ultimate edition.
 
 1. Review the Summary information. If everything is OK, click **Publish** to start the deployment process.
- 
+
 	![Starting Deployment](Images/start-deployment.png?raw=true "Starting Deployment")
 
 	_Starting Deployment_
@@ -683,34 +693,34 @@ Then, you will use these credentials to publish the MyTODO application directly 
 1. If the slot that you chose is already occupied by a previous deployment, Visual Studio warns you and asks for confirmation before it replaces it. Click **Replace** if you are certain that the current deployment is no longer needed and can be overwritten. Otherwise, click **Cancel** and repeat the operation choosing a different deployment slot.
 
 	![Overwriting an existing deployment](Images/overwrite-existing-deployment.png?raw=true)
-	
+
 	_Overwriting an existing deployment_
 
 1. After you start a deployment, you can examine the Windows Azure activity log window to determine the status of the operation. If this window is not visible, in the **View** menu, point to **Other Windows**, and then select **Windows Azure Activity Log**.
 
 1. By default, the log shows a descriptive message and a progress bar to indicate the status of the deployment operation. 
- 
+
 	![Viewing summary information in the Windows Azure activity log](Images/waz-activity-summary.png?raw=true "Viewing summary information in the Windows Azure activity log")
-	
+
 	_Viewing summary information in the Windows Azure activity log_
 
 1. To view detailed information about the deployment operation in progress, double-click the green arrow on the left side of the activity log entry.
 Notice that the additional information provided includes the deployment slot, **Production** or **Staging**, the **Website URL**, the **Deployment ID**, and a **History** log that shows state changes, including the time when each change occurred. 
- 
+
 	![Viewing detailed information about a deployment operation](Images/detailed-deployment-information.png?raw=true "Viewing detailed information about a deployment operation")
-	
+
 	_Viewing detailed information about a deployment operation_
 
 1. Wait for the deployment operation to complete, which may take several minutes. While this is happening, you can examine the **History** panel on the right side to determine the status of the deployment. For a successful deployment, it should resemble the following sequence.
- 
+
 	![Deployment operation history log](Images/deployment-operation-log.png?raw=true "Deployment operation history log")
-	
+
 	_Deployment operation history log_
 
 1. Once the deployment operation is complete, in the **Windows Azure Activity Log**, click the **Website URL** link for the completed operation to open the application in your browser and ensure that it is working properly. Notice the legend in the copyright notice at the bottom of the page indicating that this is the version that you deployed with Visual Studio.
- 
+
 	![Running the application deployed with Visual Studio](Images/running-deployment.png?raw=true "Running the application deployed with Visual Studio")
-	
+
 	_Running the application deployed with Visual Studio_
 
 ---
@@ -731,38 +741,36 @@ In this task, you update the service model of MyTODO to add an HTTPS endpoint an
 
 1. Expand the **Roles** node in the **MyTodo** project, and then double-click the **MyTodo.WebUx** role to open its properties window.
 
-1. In the **MyTodo.WebUx \[Role\]** window, switch to the **Settings** tab and configure the necessary Storage account details replacing [YOUR\_ACCOUNT\_NAME] with the name of your storage account and [YOUR\_ACCOUNT\_KEY] with the shared key. Do this for both _DataConnectionString_ and _Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString_ settings. These  are the same values that you used in previous exercises to configure the application. Remember to set the Type to Connection String for the both settings after leaving this screen.
+1. Switch to the **Endpoints** tab and select the **HTTPS** option, fill Public Port with the value 443 and leave the **Name** field unchanged. Do not choose an SSL certificate at this time; you will do so later in the exercise.
 
-1. Next, switch to the **Endpoints** tab and select the **HTTPS** option, fill Public Port with the value 443 and leave the **Name** field unchanged. Do not choose an SSL certificate at this time; you will do so later in the exercise.
- 
 	![Adding an HTTP endpoint to the application](Images/adding-http-endpoint.png?raw=true "Adding an HTTP endpoint to the application")
-	
+
 	_Adding an HTTP endpoint to the application_
 
-1. Now, choose the HTTPS endpoint as the one to use when you launch the application in the browser when you are debugging it. To do this, right-click the **MyTodo.WebUx** role in the **MyTodo** project, point to **Launch in Browser**, and then ensure that only **HTTPS** is selected.
- 
+1. Now, choose the HTTPS endpoint as the one to use when you launch the application in the browser when you are debugging it. To do this, right-click the **MyTodo.WebUx** role in the **MyTodo** project, point to **Launch in Browser**, and ensure that only **HTTPS** is selected.
+
 	![Choosing the endpoint used to debug the application](Images/choosing-debug-endpoint.png?raw=true "Choosing the endpoint used to debug the application")
-	
+
 	_Choosing the endpoint used to debug the application_
 
 1. You will now test the application locally. Press **F5** to build and launch the application in the compute emulator. Notice that the browser indicates that there is a problem with the certificate. Ignore the warning and click **Continue to this website**.
- 
+
 	![Certificate error when testing in the compute emulator](Images/certificate-error-computer-emulator.png?raw=true "Certificate error when testing in the compute emulator")
-	
+
 	_Certificate error when testing in the compute emulator_
 
 	>**Note:** When testing your application in the local development environment using SSL, you do not need to configure a certificate. Instead, the compute emulator handles this requirement by using its own certificate. However, the certification authority for the certificate that it uses is not trusted, hence the warning. You may safely ignore the warning while you test your application locally.
-	
+
 	>If you wish, you can remove the warning by installing the certificate in the **Trusted Root Certification Authorities** certificate store. Note, however, that this has security implications that you need to evaluate before you proceed.
-	
-	>To remove the warning, open the **Microsoft Management Console**, add an instance of the **Certificates** snap-in and configure it to manage certificates for the **Computer** account. Expand the **Personal\Certificates** store and locate a certificate issued to 127.0.0.1. To ensure that you have the right certificate, view its properties to verify that the **Subject** and **Issuer** fields identify the certificate as belonging to the compute emulator. To trust the certificate, simply drag and drop the certificate from the **Personal** certificate store into the **Trusted Root Certification Authorities** certificate store.
-	
+
+	>To remove the warning, open the **Microsoft Management Console** by pressing Windows key and searching for **MMC**. Add an instance of the **Certificates** snap-in and configure it to manage certificates for the **Computer** account. Expand the **Personal\Certificates** store and locate a certificate issued to 127.0.0.1. To ensure that you have the right certificate, view its properties to verify that the **Subject** and **Issuer** fields identify the certificate as belonging to the compute emulator. To trust the certificate, simply drag and drop the certificate from the **Personal** certificate store into the **Trusted Root Certification Authorities** certificate store.
+
 	> ![Certificate used by the compute emulator to implement SSL](Images/computer-emulator-certificate.png?raw=true "Certificate used by the compute emulator to implement SSL")
-	>
+
 	>_Certificate used by the compute emulator to implement SSL_
 
 1. After you access the home page, notice that the address bar shows that you are now accessing the HTTPS endpoint.
- 
+
 	![Accessing the HTTPS endpoint in the compute emulator](Images/accessing-endpoints.png?raw=true "Accessing the HTTPS endpoint in the compute emulator")
 
 	_Accessing the HTTPS endpoint in the compute emulator_
@@ -778,45 +786,44 @@ In this task, you create a self-signed certificate that you can upload to the Wi
 
 >**Note:** if you are unable to use Internet Information Services (IIS) Manager in your environment, you may skip this task. Instead, you can find a self-signed certificate that you can use among the lab’s resources.
 
->To install the certificate, open Windows Explorer, browse to **Assets** in the **Source** folder of the lab and then double-click the **YourNameToDo.pfx** file to install the certificate using the **Certificate Import Wizard**. Use "password1" (without the quotation marks) as the password. Use default values for all other options.
+>To install the certificate, open Windows Explorer, browse to **Assets** in the **Source** folder of the lab and then double-click the **MyTodoCertificate.pfx** file to install the certificate using the **Certificate Import Wizard**. Use "password1" (without the quotation marks) as the password. Use default values for all other options.
 
 >**Important:** You should only use this certificate to complete the steps in the exercise. Do not use the certificate in your production deployments.
 
+1. Start Internet Information Services Manager. To do this, click the Windows button and type "iis" in the search box and then click **Internet Information Services (IIS) Manager** in the list of installed programs.
 
-1. Start Internet Information Services Manager. To do this, click the **Start** button and type "iis" in the search box and then click **Internet Information Services (IIS) Manager** in the list of installed programs.
- 
 	![Launching Internet Information Services (IIS) Manager](Images/iis-manager-launch.png?raw=true "Launching Internet Information Services \(IIS\) Manager")
 	
 	_Launching Internet Information Services (IIS) Manager_
 
 1. In the **Connections** pane of the Internet Information Services (IIS) Manager console, select the top-level node corresponding to your computer. Next, locate the **IIS** category in the middle pane and double-click **Server Certificates**.
- 
+
 	![Managing certificates with Internet Information Services (IIS) Manager](Images/iis-managing-certificates.png?raw=true "Managing certificates with Internet Information Services \(IIS\) Manager")
 
 	_Managing certificates with Internet Information Services (IIS) Manager_
 
 1. In the **Server Certificates** page, click **Create Self-Signed Certificate** in the **Actions** pane.
- 
+
 	![Creating a self-signed certificate in the Internet Information Services (IIS) Manager](Images/iis-creating-self-signed-certificate.png?raw=true "Creating a self-signed certificate in the Internet Information Services \(IIS\) Manager")
 
 	_Creating a self-signed certificate in the Internet Information Services (IIS) Manager_
 
-1. In the **Specify Friendly Name** page of the **Create Self-Signed Certificate** wizard, enter a name to identify your certificate—this can be any name, for example, **\<yourname\>MyToDo**, where you replace the placeholder with your name—and then click **OK**.
+1. In the **Specify Friendly Name** page of the **Create Self-Signed Certificate** wizard, enter a name to identify your certificate —this can be any name, for example, **MyTodoCertificate**—, Leave and then click **OK**.
  
 	![Specifying a name for the certificate](Images/iis-specifying-certificate-name.png?raw=true "Specifying a name for the certificate")
 	
 	_Specifying a name for the certificate_
 
 1. Now, right-click the newly created certificate and select **Export** to store the certificate in a file. 
- 
+
 	![Server certificates page showing the new self-signed certificate](Images/iis-server-certificates.png?raw=true "Server certificates page showing the new self-signed certificate")
-	
+
 	_Server certificates page showing the new self-signed certificate_
 
 1. In the **Export Certificate** dialog, enter the name of a file in which to store the certificate for exporting, type a password and confirm it, and then click **OK**. Make a record of the password. You will require it later on, when you upload the certificate to the portal.
- 
+
 	![Exporting the certificate to a file](Images/iis-exporting-certificate.png?raw=true)
-	
+
 	_Exporting the certificate to a file_
 
 <a name="Ex4Task3" />
@@ -830,34 +837,36 @@ Previously, when you tested SSL access to the application in your local environm
 
 1. In the **Certificates** page, click **Add Certificate**. Complete the **Name** field with a value that identifies the certificate that you are adding, for example, use _SSL_. Ensure that the **Store Location** is set to _LocalMachine_ and the **Store Name** is set to _My_ and then click the button labeled with an ellipsis, to the right of the **Thumbprint** column.
 
+	![Adding a certificate for the service](Images/adding-certificate.png?raw=true "Adding a certificate for the service")
+
+	_Adding a certificate for the service_
+
 1. In the **Select a certificate** dialog, select the self-signed certificate that you created earlier and then click **OK**. 
-	
+
 	![Choosing a certificate for the service](Images/selecting-certificate.png?raw=true "Choosing a certificate for the service")
-	
+
 	_Choosing a certificate for the service_
 
-1. Notice that the dialog populates the **Thumbprint** column with the corresponding value from the certificate.  
- 
+1. Notice that the dialog populates the **Thumbprint** column with the corresponding value from the certificate.
 
 	![Adding a certificate to the service model of the application](Images/adding-certificate-service-model.png?raw=true "Adding a certificate to the service model of the application")
-	
+
 	_Adding a certificate to the service model of the application_
 
 1. Now, switch to the **Endpoints** tab and, in the **HTTPS** input endpoints section, expand the **SSL certificate name** drop down list and select the certificate that you added to the service in the previous step.
- 
+
 	![Choosing a certificate to use for the HTTPS endpoint](Images/choosing-certificate-https-endpoint.png?raw=true "Choosing a certificate to use for the HTTPS endpoint")
-	
+
 	_Choosing a certificate to use for the HTTPS endpoint_
 
 1. Press **CTRL+S** to save the changes to the configuration.
-
 
 <a name="Ex4Task4" />
 #### Task 4 – Uploading the Certificate to the Windows Azure Management Portal ####
 
 In this task, you upload the self-signed certificate created in the previous step to the Windows Azure Management Portal.
 
-1. Navigate to [http://manage.windowsazure.com/](http://manage.windowsazure.com) using a Web browser and sign in using your Microsoft account.
+1. Navigate to [http://manage.windowsazure.com](http://manage.windowsazure.com) using a Web browser and sign in using your Microsoft account.
 
 1. In the **Cloud Services** page, click your cloud service's **name** to go to the service's **Dashboard**.
 
@@ -867,10 +876,10 @@ In this task, you upload the self-signed certificate created in the previous ste
 
 	_Adding a new Certificate_
 
-1. In the **Upload Certificate** dialog, click **Browse**, and then navigate to the location where you stored the certificate exported in the previous task. Enter the password that specified when you exported the certificate, confirm it and then click the **Tick**.
- 
+1. In the **Upload Certificate** dialog, click **Browse**, and then navigate to the location where you stored the certificate exported in the previous task. Enter the password specified when you exported the certificate, confirm it and then click the **Tick**.
+
 	![Creating a certificate for the service](Images/creating-certificate-service.png?raw=true "Creating a certificate for the service")
-	
+
 	_Creating a certificate for the service_
 
 <a name="Ex4Verification" />
@@ -878,32 +887,50 @@ In this task, you upload the self-signed certificate created in the previous ste
 
 In this task, you deploy the application to Windows Azure and access its HTTPS endpoint to verify that your enabled SSL successfully.
 
+1. Switch back to Visual Studio. If you closed the project, you will need to reopen it from **Ex4-SecuringAppWithSSL\Begin** in the **Source** folder of the lab.
+
+1. In **Solution Explorer**, expand the **Roles** node in the **MyTodo** project, double-click the **MyTodo.WebUx** role to open its properties window, and then switch to the **Settings** tab.
+
+1. Configure the storage account connection strings. To do this, expand the **Roles** node in the **MyTodo** project and double-click the **MyTodo.WebUX** role. In the role properties window, select the **Settings** tab, select the _DataConnectionString_ setting, ensure that the **Type** is set to Connection String, and then click the button labeled with an ellipsis.
+
+	![Defining storage account connection settings](Images/defining-connection-settings.png?raw=true "Defining storage account connection settings")
+
+	_Defining storage account connection settings_
+
+1. In the **Storage Account Connection String** dialog, select the **Enter storage credentials** option. Complete your storage **Account Name** and storage **Account Key** and click **OK**.
+
+	![Configuring the storage account name and account key](Images/defining-connection-settings-2.png?raw=true "Configuring the storage account name and account key")
+
+	_Configuring the storage account name and account key_
+
+	>**Note:** This information is available in the **Dashboard** section of your storage account in the Windows Azure Management Portal. You used the same settings in Exercise 1, when you deployed and configured the application. In that instance, because you were running the application in Windows Azure, you updated the configuration at the Management Portal. 
+
+1. Repeat the previous steps to configure the _Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString_ setting using the same account information.
+
 1. Publish and deploy the application once again to the Windows Azure environment using your preferred method, by choosing among the Windows Azure Developer Portal, the Windows Azure Service Management PowerShell Cmdlets, or the Windows Azure Tools for Visual Studio. Refer to Exercises 1, 2, and 3 for instructions on how to carry out the deployment with any of these methods.
 
 	>**Note:** The service configuration now specifies an additional endpoint for HTTPS, therefore, you cannot simply upgrade the current deployment and instead, you need to re-deploy the application. This is mandatory whenever you change the topology of the service.
 
 1. Once you have deployed the application, start it and wait until its status is shown as **Ready** (or the deployment is shown as **Completed** when deploying with Visual Studio).
 
-1. Now, browse to the HTTPS endpoint (e.g. _https://yournametodo.azurewebsites.net_). Once again, you will observe a certificate error because the certificate authority for the self-signed certificate is not trusted. You may ignore this error.
- 
+1. Now, browse to the HTTPS endpoint (e.g. _https://servicemytodo.cloudapp.net_). Once again, you will observe a certificate error because the certificate authority for the self-signed certificate is not trusted. You may ignore this error.
+
 	![Accessing the HTTPS endpoint in Windows Azure](Images/accessing-https-endpoint.png?raw=true "Accessing the HTTPS endpoint in Windows Azure")
-	
+
 	_Accessing the HTTPS endpoint in Windows Azure_
 
 	>**Note:** For your production deployments, you can purchase a certificate for your application from a trusted authority and use that instead.
 
-
 <a name="Ex4Task5" />
 #### Task 5 – Configuring a CNAME Entry for DNS Resolution (Optional) ####
 
-When you deploy your application, the Windows Azure fabric assigns it a URL of the form _http://\[yournametodo\].azurewebsites.net_, where [_yournametodo_] is the public name that you chose for your cloud service at the time of creation. While this URL is completely functional, there are many reasons why you might prefer to use a URL in your own domain to access the service. In other words, instead of accessing the application as _http://yournametodo.azurewebsites.net_, use your own organization's domain name instead, for example _http://yournametodo.fabrikam.com_.
+When you deploy your application, Windows Azure assigns it a URL of the form _http://\[servicemytodo\].cloudapp.net_, where [_servicemytodo_] is the public name that you chose for your cloud service at the time of creation. While this URL is completely functional, there are many reasons why you might prefer to use a URL in your own domain to access the service. In other words, instead of accessing the application as _http://servicemytodo.cloudapp.net_, use your own organization's domain name instead, for example _http://servicemytodo.fabrikam.com_.
 
 One way to map the application to your own domain is to set up a CNAME record in your own DNS system pointing at the host name in Azure. A CNAME provides an alias for any host record, including hosts in different domains. Thus, to map the application to the _fabrikam.com_ domain, you can create the following record in your DNS.
 
-| **Organization's domain**     | **Alias**   | **Application's domain**       |
-|---------------------------|---------|----------------------------|
-| yournametodo.fabrikam.com | CNAME   | yournametodo.azurewebsites.net  |
-
+| **Organization's domain**  | **Alias** | **Application's domain**   |
+|----------------------------|-----------|----------------------------|
+| servicemytodo.fabrikam.com | CNAME     | servicemytodo.cloudapp.net |
 
 The procedure for doing this varies depending on the details of your DNS infrastructure. For external domain registrars, you can consult their documentation to find out the correct procedure for setting up a CNAME. For additional information on this topic, see [Custom Domain Names in Windows Azure](http://blog.smarx.com/posts/custom-domain-names-in-windows-azure).
 As an example, this task briefly shows how you set up an alias using Microsoft DNS on Windows Server 2008. 
@@ -918,7 +945,7 @@ As an example, this task briefly shows how you set up an alias using Microsoft D
 	
 	_Updating a lookup zone to create an alias_
 
-1. In the **New Resource Record** dialog, enter the alias name that you would like to use to access the application hosted in Azure, for example, _yournametodo_. Then, type in the fully qualified domain name of your application that Azure assigned to your application, for example, _\[yournametodo\].azurewebsites.net_. Click **OK** to create the record.
+1. In the **New Resource Record** dialog, enter the alias name that you would like to use to access the application hosted in Azure, for example, _servicemytodo_. Then, type in the fully qualified domain name of your application that Azure assigned to your application, for example, _\[servicemytodo\].cloudapp.net_. Click **OK** to create the record.
  
 	![Creating an alias for the myTODO application in Azure](Images/creating-alias-app.png?raw=true "Creating an alias for the myTODO application in Azure")
 	

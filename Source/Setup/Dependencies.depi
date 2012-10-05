@@ -17,5 +17,10 @@
 			name="Windows Azure PowerShell"
 			helpLink="http://www.windowsazure.com/en-us/develop/nodejs"
 			type="WebPI" />
+		<dependency 
+			hint="IIS7" 
+			name="IIS 7 Recommended Configuration" 
+			helpLink="http://www.iis.net/" 
+			type="WebPI" />
 	</dependencies>
 </DependencyCheckerConfiguration>
