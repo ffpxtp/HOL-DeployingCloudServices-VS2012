@@ -6,8 +6,8 @@
 ## Overview ##
 
 In this hands-on lab, you will learn how to deploy your first application in Windows Azure. The lab walks through the process using myTODO, a simple list creation and management application built using ASP.NET MVC. The lab shows the steps required for provisioning the required components in the Windows Azure Management Portal, uploading the service package, and configuring the service. You will see how you can test your application in a staging environment and then promote it to production once you are satisfied that it is operating according to your expectations.
- 
-![The myTODO application running in Windows Azure](Images/mytodo.png?raw=true "The myTODO application running in Windows Azure")
+
+![The myTODO application running in Windows Azure](./Images/mytodo.png?raw=true "The myTODO application running in Windows Azure")
 
 _The myTODO application running in Windows Azure_
 
@@ -35,7 +35,7 @@ The following is required to complete this hands-on lab:
 
 - [Visual Studio Express 2012 for Web][1] or greater.
 - [ASP.NET MVC 4][2].
-- [Windows Azure Tools for Microsoft Visual Studio 1.7][3].
+- [Windows Azure Tools for Microsoft Visual Studio 1.8][3].
 - [Windows Azure PowerShell CmdLets][4].
 - IIS 7 (with ASP.NET, WCF HTTP Activation).
 - A Windows Azure subscription - [sign up for a free trial](http://aka.ms/WATK-FreeTrial).
@@ -91,31 +91,31 @@ The application you deploy in this exercise requires a Cloud Service and a Stora
 
 1. Navigate to [http://manage.windowsazure.com](http://manage.windowsazure.com) using a Web browser and sign in using the Microsoft Account associated with your Windows Azure account.
 
-	![Signing in to the Windows Azure Management portal](Images/signing-in-to-the-windows-azure-platform-mana.png?raw=true)
+	![Signing in to the Windows Azure Management portal](./Images/signing-in-to-the-windows-azure-platform-mana.png?raw=true)
 
 	_Signing in to the Windows Azure Management portal_
 
 1. First, create an **Affinity Group** where your services will be deployed. In the Windows Azure menu, click **Networks**.
 
-	![Networks](Images/networks.png?raw=true "Networks")
+	![Networks](./Images/networks.png?raw=true "Networks")
 
 	_Select Networks_
 
 1. In the **Networks** page, click **Affinity Groups**.
 
-	![Networks page](Images/affinity-groups.png?raw=true "Networks page")
+	![Networks page](./Images/affinity-groups.png?raw=true "Networks page")
 
 	_Networks page_
 
 1. Click **Create** in order to create a new **Affinity Group**.
 
-	![Create Affinity Group](Images/create-affinity-group.png?raw=true "Create Affinity Group")
+	![Create Affinity Group](./Images/create-affinity-group.png?raw=true "Create Affinity Group")
 
 	_Create Affinity Group_
 
 1. In the **Create Affinity Group** dialog, enter a **Name** (e.g. _MyAffinityGroup_) and the **Region** for your new group. Click the **Tick** to continue.
 
-	![Affinity Group Details](Images/affinity-group-details.png?raw=true "Affinity Group Details")
+	![Affinity Group Details](./Images/affinity-group-details.png?raw=true "Affinity Group Details")
 
 	_Affinity Group Details_
 
@@ -125,51 +125,45 @@ The application you deploy in this exercise requires a Cloud Service and a Stora
 
 1. Set a unique **URL**  (e.g. _storagemytodo_) and select the _Affinity Group_ you previously created. Click **Create Storage Account** to continue.
 
-	![Creating a new storage account](Images/creating-a-new-storage-account.png?raw=true)
+	![Creating a new storage account](./Images/creating-a-new-storage-account.png?raw=true)
 
 	_Creating a new storage account_
 
 	> **Note:** The URL used for the storage account corresponds to a DNS name and is subject to standard DNS naming rules. Moreover, the name is publicly visible and must therefore be unique. The portal ensures that the name is valid by verifying that the name complies with the naming rules and is currently available. A validation error will be shown if you enter a name that does not satisfy the rules.
 	>
-	> ![URL Validation](Images/url-validation.png?raw=true)
+	> ![URL Validation](./Images/url-validation.png?raw=true)
 
-1. Wait until the Storage Account is created. Click your storage account name to go to its **Dashboard**.
+1. Wait until the Storage Account is created. Click your storage account and click **Manage Keys** at the bottom of the page in order to show the storage account's access keys.
 
-	![Storage Accounts page](Images/storage-accounts-page.png?raw=true "Storage Accounts page")
-
-	_Storage Accounts page_
-
-1.	Click **Manage Keys** at the bottom of the page in order to show the storage account's access keys.
-
-	![Manage Storage Account Keys](Images/manage-storage-account-keys.png?raw=true "Manage Storage Account Keys")
+	![Manage Storage Account Keys](./Images/manage-storage-account-keys.png?raw=true "Manage Storage Account Keys")
 
 	_Manage Storage Account Keys_
 
 1. Copy the **Storage account name**, and the **Primary access key** values. You will use these values later on to configure the application.
 
-	![Retrieving the storage access keys](Images/retrieving-the-storage-access-keys.png?raw=true)
+	![Retrieving the storage access keys](./Images/retrieving-the-storage-access-keys.png?raw=true)
 
 	_Retrieving the storage access keys_
 
 	>**Note:** The **Primary Access Key** and **Secondary Access Key** provide a shared secret that you can use to access storage. The secondary key gives the same access as the primary key and is used for backup purposes. You can regenerate each key independently in case either one is compromised.
 
-1. Next, create the **Cloud Service** that executes the application code. Click **New** | **Cloud Service** | **Quick Create**.
+1. Next, create the **Cloud Service** that executes the application code. Click **New** | **Compute** | **Cloud Service** | **Quick Create**.
 
 1.	Select a **URL** for your Cloud Service (e.g. _servicemytodo_) and the **Affinity Group** where you created the storage account. Click **Create Cloud Service** to continue. Windows Azure uses the URL value to generate the endpoint URLs for the cloud service.
 
-	![Creating a new Cloud Service](Images/creating-a-new-cloud-service.png?raw=true "Creating a new Cloud Service")
+	![Creating a new Cloud Service](./Images/creating-a-new-cloud-service.png?raw=true "Creating a new Cloud Service")
 
 	_Creating a new Cloud Service_
 
 	>**Note:** The portal ensures that the name is valid by verifying that the name complies with the naming rules and is currently available. A validation error will be shown if you enter name that does not satisfy the rules.
 	>
-	>![URL prefix validation](Images/url-prefix-validation.png?raw=true)
+	>![URL prefix validation](./Images/url-prefix-validation.png?raw=true)
 	>
 	> By choosing the same affinity group you used for your storage account, you ensure that the Cloud Service is deployed to the same data center.
 
 1.	Wait until your Cloud Service is created to continue. Do not close the browser window, you will use the portal for the next task.
 
-	![Cloud Service Created](Images/cloud-service-created.png?raw=true "Cloud Service Created")
+	![Cloud Service Created](./Images/cloud-service-created.png?raw=true "Cloud Service Created")
 
 	_Cloud Service Created_
 
@@ -197,7 +191,7 @@ In this task, you create a service package for the myTODO application and then d
 
 	To add the assembly to the service package, in the **Properties** window for the **System.Web.Mvc** assembly, if **Copy Local** setting is set to _False_ then change it to _True_.
 
-	![Including assemblies in the service package deployed to Windows Azure](Images/including-assemblies-in-the-service-package-d.png?raw=true "Including assemblies in the service package deployed to Windows Azure")
+	![Including assemblies in the service package deployed to Windows Azure](./Images/including-assemblies-in-the-service-package-d.png?raw=true "Including assemblies in the service package deployed to Windows Azure")
 
 	_Including assemblies in the service package deployed to Windows Azure_
 
@@ -205,7 +199,7 @@ In this task, you create a service package for the myTODO application and then d
 
 1. Next, change the size of the virtual machine that will host the application. To do this, in **Solution Explorer**, expand the **Roles** node of the **MyTodo** project and then double-click the **MyTodo.WebUX** role to open its properties window. In the **Configuration** page, locate the **VM** Size setting under the **Instances** category and choose the **Extra small** size from the drop down list.
  	
-	![Configuring the size of the virtual machine for the deployment](Images/configuring-vm-depl-size.png?raw=true "Configuring the size of the virtual machine for the deployment")
+	![Configuring the size of the virtual machine for the deployment](./Images/configuring-vm-depl-size.png?raw=true "Configuring the size of the virtual machine for the deployment")
 
 	_Configuring the size of the virtual machine (VM) for the deployment_
 
@@ -215,7 +209,7 @@ In this task, you create a service package for the myTODO application and then d
 
 1. Next, replace the placeholder labeled \[YOUR\_ACCOUNT\_KEY\] with the **Primary Access Key** value that you recorded earlier, when you created the storage account in Task 1. Again, replace both instances of the placeholder, one for each connection string.
 
-	![Configuring the storage account connection strings](Images/configuring-storage-account-connection.png?raw=true "Configuring the storage account connection strings")
+	![Configuring the storage account connection strings](./Images/configuring-storage-account-connection.png?raw=true "Configuring the storage account connection strings")
 
 	_Configuring the storage account connection strings_
 
@@ -223,7 +217,7 @@ In this task, you create a service package for the myTODO application and then d
 
 	>**Note:** The value used for **osVersion** here is to illustrate that you can select which release of the guest OS runs your application. You may use a higher version. 
 
-	![Configuring which version of the guest operating system runs the application in the VM](Images/configuring-guestOS.png?raw=true "Configuring which version of the guest operating system runs the application in the VM")
+	![Configuring which version of the guest operating system runs the application in the VM](./Images/configuring-guestOS.png?raw=true "Configuring which version of the guest operating system runs the application in the VM")
 
 	_Configuring which version of the guest operating system runs the application in the VM_
 
@@ -241,7 +235,7 @@ In this task, you create a service package for the myTODO application and then d
 
 1. In the **Package Windows Azure Application** dialog, click **Package** and wait until Visual Studio creates it. Once the package is ready, a window showing the folder that contains the generated files should open. Do not close this window, you will use the packages later in this task.
 
-	![Creating a service package in Visual Studio](Images/creating-a-service-package.png?raw=true "Creating a service package in Visual Studio")
+	![Creating a service package in Visual Studio](./Images/creating-a-service-package.png?raw=true "Creating a service package in Visual Studio")
 
 	_Creating a service package in Visual Studio_
 
@@ -249,33 +243,33 @@ In this task, you create a service package for the myTODO application and then d
 
 1. Make sure **Staging** tab is selected and click **Upload a new staging deployment**.
 
-	![Uploading the Application to Windows Azure](Images/uploading-the-application-to-windows-azure.png?raw=true "Uploading the Application to Windows Azure")
+	![Uploading the Application to Windows Azure](./Images/uploading-the-application-to-windows-azure.png?raw=true "Uploading the Application to Windows Azure")
 
 	_Uploading the Application to Windows Azure_
 
 	>**Note:** A Cloud Service is a service that runs your code in the Windows Azure environment. It has two separate deployment slots: staging and production. The staging deployment slot allows you to test your service in the Windows Azure environment before you deploy it to production.
 
-1.	In the **Upload a package** dialog, click **Browse your computer** under **Package** section, to select your package location. Navigate to the folder where Visual Studio generated the package in the prior steps and then select **MyTodo.cspkg**.
-
-	>**Note:** The _.cspkg_ file is an archive file that contains the binaries and files required to run a service.
-
-1.	Now, to choose the **Configuration File**, click **Browse your computer** under **Configuration** section, and select **ServiceConfiguration.cscfg** file within the same folder.
-
-	>**Note:** The _.cscfg_ file contains configuration settings for the application, including the instance count and configuration for the web role, and the storage account settings that you modified previously.
-
-1.	For the **Deployment Name**, enter a label to identify the deployment; for example, use _MyTodo-v1_.
+1.	In the **Upload a package** dialog, enter a label to identify the deployment at the **Deployment Name**; for example, use _MyTodo-v1_.
 
 	>**Note:** The management portal displays the label in its user interface for staging and production, which allows you to identify the version currently deployed in each environment.
 
+1.	Under **Package** click **From Local**, navigate to the folder where Visual Studio generated the package in the prior steps and then select **MyTodo.cspkg**.
+
+	>**Note:** The _.cspkg_ file is an archive file that contains the binaries and files required to run a service.
+
+1.	Now, under **Configuration** click **From Local** and select **ServiceConfiguration.cscfg** file within the same folder.
+
+	>**Note:** The _.cscfg_ file contains configuration settings for the application, including the instance count and configuration for the web role, and the storage account settings that you modified previously.
+
 1.	Finally, check **Deploy even if one or more roles contain a single instace**. Then click the **Tick** to start the deployment.
 
-	![Configuring service package deployment](Images/configuring-service-package-deployment.png?raw=true)
+	![Configuring service package deployment](./Images/configuring-service-package-deployment.png?raw=true)
 
 	_Configuring service package deployment_
  
 1.	Notice that the package begins to upload and that the portal shows the status of the deployment to indicate its progress.
 
-	![Uploading a service package to the Windows Azure Management Portal](Images/uploading-a-service-package-to-the-windows-az.png?raw=true)
+	![Uploading a service package to the Windows Azure Management Portal](./Images/uploading-a-service-package-to-the-windows-az.png?raw=true)
 
 	_Uploading a service package to the Windows Azure Management Portal_
 
@@ -283,7 +277,7 @@ In this task, you create a service package for the myTODO application and then d
 
 	>**Note:** During deployment, Windows Azure analyzes the configuration file and copies the service to the correct number of machines, and starts all the instances. Load balancers, network devices and monitoring are also configured during this time.
  	
-	![Package successfully deployed](Images/package-successfully-deployed.png?raw=true "Package successfully deployed")
+	![Package successfully deployed](./Images/package-successfully-deployed.png?raw=true "Package successfully deployed")
 
 	_Package successfully deployed_
 
@@ -294,7 +288,7 @@ Before you can test the deployed application, you need to configure it. In this 
 
 1. In the **Windows Azure Management Portal**, go to **Cloud Services** page and click your **MyTodo** service name to open the service **Dashboard**.
  
-	![Configuring application settings](Images/configuring-app-settings.png?raw=true "Configuring application settings")
+	![Configuring application settings](./Images/configuring-app-settings.png?raw=true "Configuring application settings")
 
 	_Configuring application settings_
 
@@ -302,7 +296,7 @@ Before you can test the deployed application, you need to configure it. In this 
 
 1. In the **Scale** page, make sure **Staging** tab is selected and update the number of roles to _2_.
 
-	![Scaling Cloud Service](Images/scaling-cloud-service.png?raw=true "Scaling Cloud Service")
+	![Scaling Cloud Service](./Images/scaling-cloud-service.png?raw=true "Scaling Cloud Service")
 
 	_Scaling Cloud Service_
  
@@ -312,7 +306,7 @@ Before you can test the deployed application, you need to configure it. In this 
 
 1. Click **Save** to update the configuration and wait for the **Cloud Service** to apply the new settings.
  
-	![Updating the number of role instances](Images/updating-number-role-instances.png?raw=true "Updating the number of role instances")
+	![Updating the number of role instances](./Images/updating-number-role-instances.png?raw=true "Updating the number of role instances")
 
 	_Updating the number of role instances_
 
@@ -325,7 +319,7 @@ In this task, you run the application in the staging environment and access its 
 
 1. In the **Cloud Services** page, go to your MyTodo service **Dashboard** and then click the **Site URL** link.
 
-	![Running the application in the staging environment](Images/running-app-staging.png?raw=true "Running the application in the staging environment")
+	![Running the application in the staging environment](./Images/running-app-staging.png?raw=true "Running the application in the staging environment")
 
 	_Running the application in the staging environment_
 
@@ -335,7 +329,7 @@ In this task, you run the application in the staging environment and access its 
 
 1. Click **Start** to prepare the application for first time use, which requires you to create a new account. To do this, navigate to register menu.
 
-	![Application running in the staging environment](Images/application-running-staging.png?raw=true "Application running in the staging environment")
+	![Application running in the staging environment](./Images/application-running-staging.png?raw=true "Application running in the staging environment")
 
 	_Application running in the staging environment_
 
@@ -343,13 +337,13 @@ In this task, you run the application in the staging environment and access its 
 
 	>**Note:**  Account information is stored in the storage account created earlier. Data is not shared between to do lists.
 
-	![Application ready to be used](Images/application-new-account.png?raw=true "Application ready to be used")
+	![Application ready to be used](./Images/application-new-account.png?raw=true "Application ready to be used")
 
 	_Creating a new account_
 
 1. Next, the application enumerates the lists that you have currently defined. Since this is your first use, no lists should appear.
 
-	![Application ready to be used](Images/application-ready.png?raw=true "Application ready to be used")
+	![Application ready to be used](./Images/application-ready.png?raw=true "Application ready to be used")
 
 	_Application ready to be used_
 
@@ -362,19 +356,19 @@ Now that you have verified that the service is working correctly in the staging 
 
 1. In **Cloud Services** page, click your MyTodo service **name** to open the **Dashboard**. Then click **Swap** within the bottom menu.
 
-	![Promoting the application to the production slot](Images/promoting-app-prod.png?raw=true "Promoting the application to the production slot")
+	![Promoting the application to the production slot](./Images/promoting-app-prod.png?raw=true "Promoting the application to the production slot")
 
 	_Promoting the application to the production slot_
 
 1. In the **VIP Swap** dialog, click **Yes** to swap the deployments between staging and production.
  
-	![Promoting the application to the production deployment](Images/promoting-app-deploy.png?raw=true "Promoting the application to the production deployment")
+	![Promoting the application to the production deployment](./Images/promoting-app-deploy.png?raw=true "Promoting the application to the production deployment")
 	
 	_Promoting the application to the production deployment_
 
 1. Once the Transition finishes, switch to **Production** tab and click the **Site URL** link to open the production site in a browser window and notice the URL in the address bar.
  
-	![Application running in the production environment](Images/application-running-production.png?raw=true "Application running in the production environment")
+	![Application running in the production environment](./Images/application-running-production.png?raw=true "Application running in the production environment")
 
 	_Application running in the production environment_
 
@@ -404,7 +398,7 @@ In this task, you will log on to the Windows Azure Portal and download the publi
 
 1.	**Save** the publish-settings file to your local machine.
 
-	![Downloading publish-settings file](Images/downloading-publish-settings-file.png?raw=true 'Downloading publish-settings file')
+	![Downloading publish-settings file](./Images/downloading-publish-settings-file.png?raw=true 'Downloading publish-settings file')
 
 	_Downloading publish-settings file_
 
@@ -461,13 +455,13 @@ In this task, you will configure the application using your Storage account info
 
 1. Configure the storage account connection strings. To do this, expand the **Roles** node in the **MyTodo** project and double-click the **MyTodo.WebUX** role. In the role properties window, select the **Settings** tab, select the _DataConnectionString_ setting, ensure that the **Type** is set to Connection String, and then click the button labeled with an ellipsis.
 
-	![Defining storage account connection settings](Images/defining-connection-settings.png?raw=true "Defining storage account connection settings")
+	![Defining storage account connection settings](./Images/defining-connection-settings.png?raw=true "Defining storage account connection settings")
 
 	_Defining storage account connection settings_
 
-1. In the **Storage Account Connection String** dialog, select the **Enter storage credentials** option. Complete your storage **Account Name** and storage **Account Key** and click **OK**.
+1. In the **Storage Account Connection String** dialog, select the **Manually entered credentials** option. Complete your storage **Account Name** and storage **Account Key** and click **OK**.
  
-	![Configuring the storage account name and account key](Images/defining-connection-settings-2.png?raw=true "Configuring the storage account name and account key")
+	![Configuring the storage account name and account key](./Images/defining-connection-settings-2.png?raw=true "Configuring the storage account name and account key")
 	
 	_Configuring the storage account name and account key_
 
@@ -475,7 +469,7 @@ In this task, you will configure the application using your Storage account info
 
 1. Repeat the previous steps to configure the _Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString_ setting using the same account information.
 
-1. To create a service package, right-click the cloud service project and select **Package**. In the **Package Windows Azure Application** dialog, click **Package** and then wait until Visual Studio creates it. Once the package is ready, Visual Studio opens a window showing the folder that contains the generated files. Close the window after you see the package.
+1. To create a service package, right-click the cloud service project and select **Package**. In the **Package Windows Azure Application** dialog, click **Package** and then wait until Visual Studio creates it. Once the package is ready, Visual Studio opens a window showing the folder that contains the generated files.
 
 <a name="Ex2Task3" />
 #### Task 3 – Uploading a Service Package Using Windows PowerShell ####
@@ -495,14 +489,14 @@ In the previous exercise, you uploaded the service package for the myTODO applic
 	$configurationLocation = '[CONFIGURATION-LOCATION]'
 	$deploymentLabel = 'MyTodo-v2'
 	New-AzureDeployment -ServiceName $serviceName -Package $packageLocation -Configuration $configurationLocation -Slot 'Staging' -Label $deploymentLabel -DoNotStart
-
 	````
-	|         |               |
-	|---------|---------------|
-	| [YOUR-SERVICE-NAME-LOWER-CASE]         | The service name chosen when configuring the cloud service URL in Exercise 1, not its Service Label |
-	| [PACKAGE-LOCATION]                     | A path to a local file or the URL of the blob in your Storage Account that contains the service package.    |
-	| [CONFIGURATION-LOCATION]               | A path to a local file or the public URL of the blob that contains the service configuration file.   |
-	| [YOUR-DEPLOYMENT-LABEL] | The deployment label.|
+
+	|                                |   |
+	|--------------------------------|---|
+	| [YOUR-SERVICE-NAME-LOWER-CASE] | The service name chosen when configuring the cloud service URL in Exercise 1, not its Service Label. |
+	| [PACKAGE-LOCATION]             | A path to a local file or the URL of the blob in your Storage Account that contains the service package. |
+	| [CONFIGURATION-LOCATION]       | A path to a local file or the public URL of the blob that contains the service configuration file. |
+	| [YOUR-DEPLOYMENT-LABEL]        | The deployment label. |
 
 	>**Note:** The command shown above uses the **New-AzureDeployment** cmdlet to upload a service package and create a new deployment in the staging environment. It assigns a "MyTodo-v2" label to identify this deployment.
 
@@ -510,13 +504,13 @@ In the previous exercise, you uploaded the service package for the myTODO applic
 
 1. Press **ENTER** to execute the command and wait until the **New-AzureDeployment** command finishes.
 
-	![Deploying a new service package to Windows Azure using PowerShell](Images/command-line-deploying-powershell.png?raw=true "Deploying a new service package to Windows Azure using PowerShell")
+	![Deploying a new service package to Windows Azure using PowerShell](./Images/command-line-deploying-powershell.png?raw=true "Deploying a new service package to Windows Azure using PowerShell")
 
 	_Deploying a new service package to Windows Azure using PowerShell_
 
 1. In the Windows Azure Management Portal, open the Cloud Service's **Dashboard** page and notice how the deployment for the staging environment shows its status with the message "**Updating deployment...**" in the UI. It may take a few seconds for the service status to refresh. Wait for the deployment operation to complete and display the status as **Stopped**.
 
-	![Deployment Stopped](Images/deployment-stopped.png?raw=true "Deployment Stopped")
+	![Deployment Stopped](./Images/deployment-stopped.png?raw=true "Deployment Stopped")
 
 	_Deployment Stopped_
 
@@ -559,25 +553,24 @@ In this task, you use the Windows Azure PowerShell cmdlets to upgrade an existin
 	````
 
 	>**Note:** The command line shown above concatenates a sequence of cmdlets. First, it obtains a reference to the cloud service using **Get-AzureService**, then it uses **Get-AzureDeployment** to retrieve its _staging_ environment, and finally it uploads the package using **Set-AzureDeployment**. This is done to illustrate how to compose a complex command using the PowerShell pipeline. In fact, in this particular case, you could instead provide all the required information to **Set-AzureDeployment** to achieve the same result. For example:
-	
-	>Set-AzureDeployment -Upgrade -ServiceName $serviceName -Package $packageLocation -Configuration $configurationLocation -Slot 'Staging' -Label $deploymentLabel 
+
+	>> Set-AzureDeployment -Upgrade -ServiceName $serviceName -Package $packageLocation -Configuration $configurationLocation -Slot 'Staging' -Label $deploymentLabel 
 
 1. Press **ENTER** to execute the command. Wait until the deployment process finishes, which may take several minutes. When the operation ends, it displays a message with the outcome of the operation; if the deployment completed without errors, you will see the message "Succeeded".
 
-	![PowerShell console showing the status of the package deployment operation](Images/command-line-powershell-status.png?raw=true "PowerShell console showing the status of the package deployment operation")
+	![PowerShell console showing the status of the package deployment operation](./Images/command-line-powershell-status.png?raw=true "PowerShell console showing the status of the package deployment operation")
 
 	_PowerShell console showing the status of the package deployment operation_
 
 	>**Note:** Deploying a package using the steps described above does not change its state. If the service is not running prior to deployment, it will remain in that state. To start the service, you need to update its deployment status using the **Set-AzureDeployment** cmdlet.
 
 1. To change the status of the service to a running state, in the **PowerShell** console, enter the following command.
-PowerShell Console
 
 	<!-- mark:1 -->
 	````PowerShell
 	Set-AzureDeployment -Status -ServiceName $serviceName -NewStatus 'Running' -Slot 'Staging'
 	````
-	
+
 1. Finally, swap the deployments in the staging and production environments. To do this, in the **PowerShell** console, use the **Get-Deployment** and **Move-Deployment** cmdlets, as shown below.
 
 	<!-- mark:1 -->
@@ -592,7 +585,7 @@ Now that you have deployed your updated solution to Window Azure, you are ready 
 
 1. In your Cloud Service **Dashboard** page within the management portal, click the **Web Site URL** link to open the production site in a browser window. Notice the footer of the page. It should reflect the updated text that you entered in the last task.
 
-	![New deployment showing the updated footer text](Images/new-deployment.png?raw=true "New deployment showing the updated footer text")
+	![New deployment showing the updated footer text](./Images/new-deployment.png?raw=true "New deployment showing the updated footer text")
 
 	_New deployment showing the updated footer text_
 
@@ -629,13 +622,13 @@ In this task, you update the storage connection strings to point to your Storage
 
 1. Configure the storage account connection strings. To do this, expand the **Roles** node in the **MyTodo** project and double-click the **MyTodo.WebUX** role. In the role properties window, select the **Settings** tab, select the _DataConnectionString_ setting, ensure that the **Type** is set to Connection String, and then click the button labeled with an ellipsis.
 
-	![Defining storage account connection settings](Images/defining-connection-settings.png?raw=true "Defining storage account connection settings")
+	![Defining storage account connection settings](./Images/defining-connection-settings.png?raw=true "Defining storage account connection settings")
 
 	_Defining storage account connection settings_
 
-1. In the **Storage Account Connection String** dialog, select the **Enter storage credentials** option. Complete your storage **Account Name** and storage **Account Key** and click **OK**.
+1. In the **Storage Account Connection String** dialog, select the **Manually entered credentials** option. Complete your storage **Account Name** and storage **Account Key** and click **OK**.
 
-	![Configuring the storage account name and account key](Images/defining-connection-settings-2.png?raw=true "Configuring the storage account name and account key")
+	![Configuring the storage account name and account key](./Images/defining-connection-settings-2.png?raw=true "Configuring the storage account name and account key")
 
 	_Configuring the storage account name and account key_
 
@@ -660,7 +653,7 @@ Then, you will use these credentials to publish the MyTODO application directly 
 
 1. Back in the **Publish Windows Azure Application** dialog, select the subscription created from the _PublishSettings_ file and click **Next**.
  
-	![Signing In](Images/waz-sign-in.png?raw=true "Signing In")
+	![Signing In](./Images/waz-sign-in.png?raw=true "Signing In")
 	
 	_Signing In_
 
@@ -668,7 +661,7 @@ Then, you will use these credentials to publish the MyTODO application directly 
 
 1. Make sure the **Environment** is set to _Production_ and the **Build Configuration** to _Release_. Also, set the **Service Configuration** with _default_ value.
  
-	![Deployment Common Settings](Images/deployment-common-settings.png?raw=true "Deployment Common Settings")
+	![Deployment Common Settings](./Images/deployment-common-settings.png?raw=true "Deployment Common Settings")
 	
 	_Deployment Common Settings_
 
@@ -676,7 +669,7 @@ Then, you will use these credentials to publish the MyTODO application directly 
 
 1. Like with the Cloud Services, the dialog populates the drop down list labeled **Storage account** with all the storage services that you have configured in your Windows Azure account. To publish a service, Visual Studio first uploads the service package to storage in Windows Azure, and then publish the service from there. Select the storage service that you wish to use for this purpose and click **Next**.
  
-	![Deployment Advanced Settings](Images/deployment-advanced-settings.png?raw=true "Deployment Advanced Settings")
+	![Deployment Advanced Settings](./Images/deployment-advanced-settings.png?raw=true "Deployment Advanced Settings")
 	
 	_Deployment Advanced Settings_
 
@@ -684,7 +677,7 @@ Then, you will use these credentials to publish the MyTODO application directly 
 
 1. Review the Summary information. If everything is OK, click **Publish** to start the deployment process.
 
-	![Starting Deployment](Images/start-deployment.png?raw=true "Starting Deployment")
+	![Starting Deployment](./Images/start-deployment.png?raw=true "Starting Deployment")
 
 	_Starting Deployment_
 
@@ -692,7 +685,7 @@ Then, you will use these credentials to publish the MyTODO application directly 
 
 1. If the slot that you chose is already occupied by a previous deployment, Visual Studio warns you and asks for confirmation before it replaces it. Click **Replace** if you are certain that the current deployment is no longer needed and can be overwritten. Otherwise, click **Cancel** and repeat the operation choosing a different deployment slot.
 
-	![Overwriting an existing deployment](Images/overwrite-existing-deployment.png?raw=true)
+	![Overwriting an existing deployment](./Images/overwrite-existing-deployment.png?raw=true)
 
 	_Overwriting an existing deployment_
 
@@ -700,26 +693,26 @@ Then, you will use these credentials to publish the MyTODO application directly 
 
 1. By default, the log shows a descriptive message and a progress bar to indicate the status of the deployment operation. 
 
-	![Viewing summary information in the Windows Azure activity log](Images/waz-activity-summary.png?raw=true "Viewing summary information in the Windows Azure activity log")
+	![Viewing summary information in the Windows Azure activity log](./Images/waz-activity-summary.png?raw=true "Viewing summary information in the Windows Azure activity log")
 
 	_Viewing summary information in the Windows Azure activity log_
 
 1. To view detailed information about the deployment operation in progress, double-click the green arrow on the left side of the activity log entry.
 Notice that the additional information provided includes the deployment slot, **Production** or **Staging**, the **Website URL**, the **Deployment ID**, and a **History** log that shows state changes, including the time when each change occurred. 
 
-	![Viewing detailed information about a deployment operation](Images/detailed-deployment-information.png?raw=true "Viewing detailed information about a deployment operation")
+	![Viewing detailed information about a deployment operation](./Images/detailed-deployment-information.png?raw=true "Viewing detailed information about a deployment operation")
 
 	_Viewing detailed information about a deployment operation_
 
 1. Wait for the deployment operation to complete, which may take several minutes. While this is happening, you can examine the **History** panel on the right side to determine the status of the deployment. For a successful deployment, it should resemble the following sequence.
 
-	![Deployment operation history log](Images/deployment-operation-log.png?raw=true "Deployment operation history log")
+	![Deployment operation history log](./Images/deployment-operation-log.png?raw=true "Deployment operation history log")
 
 	_Deployment operation history log_
 
 1. Once the deployment operation is complete, in the **Windows Azure Activity Log**, click the **Website URL** link for the completed operation to open the application in your browser and ensure that it is working properly. Notice the legend in the copyright notice at the bottom of the page indicating that this is the version that you deployed with Visual Studio.
 
-	![Running the application deployed with Visual Studio](Images/running-deployment.png?raw=true "Running the application deployed with Visual Studio")
+	![Running the application deployed with Visual Studio](./Images/running-deployment.png?raw=true "Running the application deployed with Visual Studio")
 
 	_Running the application deployed with Visual Studio_
 
@@ -743,19 +736,19 @@ In this task, you update the service model of MyTODO to add an HTTPS endpoint an
 
 1. Switch to the **Endpoints** tab and select the **HTTPS** option, fill Public Port with the value 443 and leave the **Name** field unchanged. Do not choose an SSL certificate at this time; you will do so later in the exercise.
 
-	![Adding an HTTP endpoint to the application](Images/adding-http-endpoint.png?raw=true "Adding an HTTP endpoint to the application")
+	![Adding an HTTP endpoint to the application](./Images/adding-http-endpoint.png?raw=true "Adding an HTTP endpoint to the application")
 
 	_Adding an HTTP endpoint to the application_
 
 1. Now, choose the HTTPS endpoint as the one to use when you launch the application in the browser when you are debugging it. To do this, right-click the **MyTodo.WebUx** role in the **MyTodo** project, point to **Launch in Browser**, and ensure that only **HTTPS** is selected.
 
-	![Choosing the endpoint used to debug the application](Images/choosing-debug-endpoint.png?raw=true "Choosing the endpoint used to debug the application")
+	![Choosing the endpoint used to debug the application](./Images/choosing-debug-endpoint.png?raw=true "Choosing the endpoint used to debug the application")
 
 	_Choosing the endpoint used to debug the application_
 
 1. You will now test the application locally. Press **F5** to build and launch the application in the compute emulator. Notice that the browser indicates that there is a problem with the certificate. Ignore the warning and click **Continue to this website**.
 
-	![Certificate error when testing in the compute emulator](Images/certificate-error-computer-emulator.png?raw=true "Certificate error when testing in the compute emulator")
+	![Certificate error when testing in the compute emulator](./Images/certificate-error-computer-emulator.png?raw=true "Certificate error when testing in the compute emulator")
 
 	_Certificate error when testing in the compute emulator_
 
@@ -765,13 +758,13 @@ In this task, you update the service model of MyTODO to add an HTTPS endpoint an
 
 	>To remove the warning, open the **Microsoft Management Console** by pressing Windows key and searching for **MMC**. Add an instance of the **Certificates** snap-in and configure it to manage certificates for the **Computer** account. Expand the **Personal\Certificates** store and locate a certificate issued to 127.0.0.1. To ensure that you have the right certificate, view its properties to verify that the **Subject** and **Issuer** fields identify the certificate as belonging to the compute emulator. To trust the certificate, simply drag and drop the certificate from the **Personal** certificate store into the **Trusted Root Certification Authorities** certificate store.
 
-	> ![Certificate used by the compute emulator to implement SSL](Images/computer-emulator-certificate.png?raw=true "Certificate used by the compute emulator to implement SSL")
+	> ![Certificate used by the compute emulator to implement SSL](./Images/computer-emulator-certificate.png?raw=true "Certificate used by the compute emulator to implement SSL")
 
 	>_Certificate used by the compute emulator to implement SSL_
 
 1. After you access the home page, notice that the address bar shows that you are now accessing the HTTPS endpoint.
 
-	![Accessing the HTTPS endpoint in the compute emulator](Images/accessing-endpoints.png?raw=true "Accessing the HTTPS endpoint in the compute emulator")
+	![Accessing the HTTPS endpoint in the compute emulator](./Images/accessing-endpoints.png?raw=true "Accessing the HTTPS endpoint in the compute emulator")
 
 	_Accessing the HTTPS endpoint in the compute emulator_
 
@@ -792,37 +785,37 @@ In this task, you create a self-signed certificate that you can upload to the Wi
 
 1. Start Internet Information Services Manager. To do this, click the Windows button and type "iis" in the search box and then click **Internet Information Services (IIS) Manager** in the list of installed programs.
 
-	![Launching Internet Information Services (IIS) Manager](Images/iis-manager-launch.png?raw=true "Launching Internet Information Services \(IIS\) Manager")
+	![Launching Internet Information Services (IIS) Manager](./Images/iis-manager-launch.png?raw=true "Launching Internet Information Services \(IIS\) Manager")
 	
 	_Launching Internet Information Services (IIS) Manager_
 
 1. In the **Connections** pane of the Internet Information Services (IIS) Manager console, select the top-level node corresponding to your computer. Next, locate the **IIS** category in the middle pane and double-click **Server Certificates**.
 
-	![Managing certificates with Internet Information Services (IIS) Manager](Images/iis-managing-certificates.png?raw=true "Managing certificates with Internet Information Services \(IIS\) Manager")
+	![Managing certificates with Internet Information Services (IIS) Manager](./Images/iis-managing-certificates.png?raw=true "Managing certificates with Internet Information Services \(IIS\) Manager")
 
 	_Managing certificates with Internet Information Services (IIS) Manager_
 
 1. In the **Server Certificates** page, click **Create Self-Signed Certificate** in the **Actions** pane.
 
-	![Creating a self-signed certificate in the Internet Information Services (IIS) Manager](Images/iis-creating-self-signed-certificate.png?raw=true "Creating a self-signed certificate in the Internet Information Services \(IIS\) Manager")
+	![Creating a self-signed certificate in the Internet Information Services (IIS) Manager](./Images/iis-creating-self-signed-certificate.png?raw=true "Creating a self-signed certificate in the Internet Information Services \(IIS\) Manager")
 
 	_Creating a self-signed certificate in the Internet Information Services (IIS) Manager_
 
 1. In the **Specify Friendly Name** page of the **Create Self-Signed Certificate** wizard, enter a name to identify your certificate —this can be any name, for example, **MyTodoCertificate**—, Leave and then click **OK**.
  
-	![Specifying a name for the certificate](Images/iis-specifying-certificate-name.png?raw=true "Specifying a name for the certificate")
+	![Specifying a name for the certificate](./Images/iis-specifying-certificate-name.png?raw=true "Specifying a name for the certificate")
 	
 	_Specifying a name for the certificate_
 
 1. Now, right-click the newly created certificate and select **Export** to store the certificate in a file. 
 
-	![Server certificates page showing the new self-signed certificate](Images/iis-server-certificates.png?raw=true "Server certificates page showing the new self-signed certificate")
+	![Server certificates page showing the new self-signed certificate](./Images/iis-server-certificates.png?raw=true "Server certificates page showing the new self-signed certificate")
 
 	_Server certificates page showing the new self-signed certificate_
 
 1. In the **Export Certificate** dialog, enter the name of a file in which to store the certificate for exporting, type a password and confirm it, and then click **OK**. Make a record of the password. You will require it later on, when you upload the certificate to the portal.
 
-	![Exporting the certificate to a file](Images/iis-exporting-certificate.png?raw=true)
+	![Exporting the certificate to a file](./Images/iis-exporting-certificate.png?raw=true)
 
 	_Exporting the certificate to a file_
 
@@ -837,25 +830,25 @@ Previously, when you tested SSL access to the application in your local environm
 
 1. In the **Certificates** page, click **Add Certificate**. Complete the **Name** field with a value that identifies the certificate that you are adding, for example, use _SSL_. Ensure that the **Store Location** is set to _LocalMachine_ and the **Store Name** is set to _My_ and then click the button labeled with an ellipsis, to the right of the **Thumbprint** column.
 
-	![Adding a certificate for the service](Images/adding-certificate.png?raw=true "Adding a certificate for the service")
+	![Adding a certificate for the service](./Images/adding-certificate.png?raw=true "Adding a certificate for the service")
 
 	_Adding a certificate for the service_
 
 1. In the **Select a certificate** dialog, select the self-signed certificate that you created earlier and then click **OK**. 
 
-	![Choosing a certificate for the service](Images/selecting-certificate.png?raw=true "Choosing a certificate for the service")
+	![Choosing a certificate for the service](./Images/selecting-certificate.png?raw=true "Choosing a certificate for the service")
 
 	_Choosing a certificate for the service_
 
 1. Notice that the dialog populates the **Thumbprint** column with the corresponding value from the certificate.
 
-	![Adding a certificate to the service model of the application](Images/adding-certificate-service-model.png?raw=true "Adding a certificate to the service model of the application")
+	![Adding a certificate to the service model of the application](./Images/adding-certificate-service-model.png?raw=true "Adding a certificate to the service model of the application")
 
 	_Adding a certificate to the service model of the application_
 
 1. Now, switch to the **Endpoints** tab and, in the **HTTPS** input endpoints section, expand the **SSL certificate name** drop down list and select the certificate that you added to the service in the previous step.
 
-	![Choosing a certificate to use for the HTTPS endpoint](Images/choosing-certificate-https-endpoint.png?raw=true "Choosing a certificate to use for the HTTPS endpoint")
+	![Choosing a certificate to use for the HTTPS endpoint](./Images/choosing-certificate-https-endpoint.png?raw=true "Choosing a certificate to use for the HTTPS endpoint")
 
 	_Choosing a certificate to use for the HTTPS endpoint_
 
@@ -872,13 +865,13 @@ In this task, you upload the self-signed certificate created in the previous ste
 
 1. Click **Certificates** and then **Upload a certificate**.
 
-	![Adding a new Certificate](Images/adding-a-new-certificate.png?raw=true "Adding a new Certificate")
+	![Adding a new Certificate](./Images/adding-a-new-certificate.png?raw=true "Adding a new Certificate")
 
 	_Adding a new Certificate_
 
 1. In the **Upload Certificate** dialog, click **Browse**, and then navigate to the location where you stored the certificate exported in the previous task. Enter the password specified when you exported the certificate, confirm it and then click the **Tick**.
 
-	![Creating a certificate for the service](Images/creating-certificate-service.png?raw=true "Creating a certificate for the service")
+	![Creating a certificate for the service](./Images/creating-certificate-service.png?raw=true "Creating a certificate for the service")
 
 	_Creating a certificate for the service_
 
@@ -893,13 +886,13 @@ In this task, you deploy the application to Windows Azure and access its HTTPS e
 
 1. Configure the storage account connection strings. To do this, expand the **Roles** node in the **MyTodo** project and double-click the **MyTodo.WebUX** role. In the role properties window, select the **Settings** tab, select the _DataConnectionString_ setting, ensure that the **Type** is set to Connection String, and then click the button labeled with an ellipsis.
 
-	![Defining storage account connection settings](Images/defining-connection-settings.png?raw=true "Defining storage account connection settings")
+	![Defining storage account connection settings](./Images/defining-connection-settings.png?raw=true "Defining storage account connection settings")
 
 	_Defining storage account connection settings_
 
-1. In the **Storage Account Connection String** dialog, select the **Enter storage credentials** option. Complete your storage **Account Name** and storage **Account Key** and click **OK**.
+1. In the **Storage Account Connection String** dialog, select the **Manually entered credentials** option. Complete your storage **Account Name** and storage **Account Key** and click **OK**.
 
-	![Configuring the storage account name and account key](Images/defining-connection-settings-2.png?raw=true "Configuring the storage account name and account key")
+	![Configuring the storage account name and account key](./Images/defining-connection-settings-2.png?raw=true "Configuring the storage account name and account key")
 
 	_Configuring the storage account name and account key_
 
@@ -915,7 +908,7 @@ In this task, you deploy the application to Windows Azure and access its HTTPS e
 
 1. Now, browse to the HTTPS endpoint (e.g. _https://servicemytodo.cloudapp.net_). Once again, you will observe a certificate error because the certificate authority for the self-signed certificate is not trusted. You may ignore this error.
 
-	![Accessing the HTTPS endpoint in Windows Azure](Images/accessing-https-endpoint.png?raw=true "Accessing the HTTPS endpoint in Windows Azure")
+	![Accessing the HTTPS endpoint in Windows Azure](./Images/accessing-https-endpoint.png?raw=true "Accessing the HTTPS endpoint in Windows Azure")
 
 	_Accessing the HTTPS endpoint in Windows Azure_
 
@@ -941,19 +934,19 @@ As an example, this task briefly shows how you set up an alias using Microsoft D
 
 1. In DNS Manager, expand the **Forward Lookup Zones** node, then right-click the zone where you intend to set up the alias and select **New Alias (CNAME)**.Notice that if you do not have any zone, you must create one prior the alias creation.
  
-	![Updating a lookup zone to create an alias](Images/creating-alias.png?raw=true "Updating a lookup zone to create an alias")
+	![Updating a lookup zone to create an alias](./Images/creating-alias.png?raw=true "Updating a lookup zone to create an alias")
 	
 	_Updating a lookup zone to create an alias_
 
 1. In the **New Resource Record** dialog, enter the alias name that you would like to use to access the application hosted in Azure, for example, _servicemytodo_. Then, type in the fully qualified domain name of your application that Azure assigned to your application, for example, _\[servicemytodo\].cloudapp.net_. Click **OK** to create the record.
  
-	![Creating an alias for the myTODO application in Azure](Images/creating-alias-app.png?raw=true "Creating an alias for the myTODO application in Azure")
+	![Creating an alias for the myTODO application in Azure](./Images/creating-alias-app.png?raw=true "Creating an alias for the myTODO application in Azure")
 	
 	_Creating an alias for the myTODO application in Azure_
 
 1. In the DNS Manager console, review the contents of the updated zone to find the newly created CNAME record.
  
-	![Updated lookup zone showing the new alias for the application](Images/lookup-zone-alias.png?raw=true "Updated lookup zone showing the new alias for the application")
+	![Updated lookup zone showing the new alias for the application](./Images/lookup-zone-alias.png?raw=true "Updated lookup zone showing the new alias for the application")
 	
 	_Updated lookup zone showing the new alias for the application_
 
@@ -964,7 +957,7 @@ As an example, this task briefly shows how you set up an alias using Microsoft D
 	nslookup <youralias>
 	````
  
-	![Verifying the domain alias](Images/command-prompt-alias-verification.png?raw=true "Verifying the domain alias")
+	![Verifying the domain alias](./Images/command-prompt-alias-verification.png?raw=true "Verifying the domain alias")
 
 	_Verifying the domain alias_
 	

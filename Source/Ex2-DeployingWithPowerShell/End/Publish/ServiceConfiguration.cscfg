@@ -8,7 +8,7 @@
 
   **********************************************************************************************
 -->
-<ServiceConfiguration serviceName="MyTodo" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" schemaVersion="2012-05.1.7" osVersion="WA-GUEST-OS-1.20_201208-02">
+<ServiceConfiguration serviceName="MyTodo" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" schemaVersion="2012-10.1.8" osVersion="WA-GUEST-OS-1.20_201208-02">
   <Role name="MyTodo.WebUx">
     <Instances count="1" />
     <ConfigurationSettings>

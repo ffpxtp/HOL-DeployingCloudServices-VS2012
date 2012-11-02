@@ -9,13 +9,13 @@
             disableSkip="false"
 			type="Registry" />
 		<dependency
-			hint="vwdorvs11azurepack" 
-			name="Windows Azure SDK for .NET" 
+			hint="VS11AzurePack" 
+			name="Windows Azure SDK Tools for Visual Studio 2012 - Latest" 
 			helpLink=""
 			type="WebPI" />
 		<dependency hint="WindowsAzurePowershell"
 			name="Windows Azure PowerShell"
-			helpLink="http://www.windowsazure.com/en-us/develop/nodejs"
+			helpLink="http://www.windowsazure.com/en-us/manage/downloads/"
 			type="WebPI" />
 		<dependency 
 			hint="IIS7" 

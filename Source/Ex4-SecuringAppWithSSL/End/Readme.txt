@@ -1,1 +1,1 @@
-Before deploying to Windows Azure, ensure you have updated **DiagnosticsConnectionString** and **DataConnectionString** values from the MyTodo cloud app ServiceConfiguration.cscfg file with valid Storage Account values.
+To run the provided End solution you need to create a self signed certificate and replace the settings placeholders with your Azure account as described in the lab document in the Exercise 4.

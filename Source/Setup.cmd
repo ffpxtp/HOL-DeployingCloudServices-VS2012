@@ -18,7 +18,7 @@ echo    Note: requires internet connection.
 echo.
 echo 2. Exit.
 echo.
-choice /c:123 /M "Choose an option: " 
+choice /c:12 /M "Choose an option: " 
 if errorlevel 2 goto exit
 if errorlevel 1 goto downloaddc
 
