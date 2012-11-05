@@ -1,4 +1,4 @@
-// ----------------------------------------------------------------------------------
+﻿// ----------------------------------------------------------------------------------
 // Microsoft Developer & Platform Evangelism
 // 
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -30,7 +30,7 @@ namespace MyTodo.Data.WindowsAzure
 
         public TaskDataContext()
             : this(
-                CloudStorageAccount.FromConfigurationSetting("DataConnectionString").TableEndpoint.AbsoluteUri, 
+                CloudStorageAccount.FromConfigurationSetting("DataConnectionString").TableEndpoint.AbsoluteUri,
                 CloudStorageAccount.FromConfigurationSetting("DataConnectionString").Credentials)
         {
         }
@@ -49,7 +49,7 @@ namespace MyTodo.Data.WindowsAzure
                 var parts = name.Split('.');
                 if (parts.Length == 2)
                 {
-                    return resolverTypes[parts[1]];
+                    return resolverTypes.FirstOrDefault(t => t.Key == parts[1]).Value;
                 }
 
                 return null;

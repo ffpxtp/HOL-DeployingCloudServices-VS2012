@@ -9,7 +9,6 @@
             Use the form below to update your account information.
         </p>
     </div>
-    @(Html.ValidationSummary("Profile update was unsuccessful. Please correct the errors and try again."))
     @using (Html.BeginForm())
     {
         <div class="form">
@@ -70,6 +69,6 @@
                          .keyup(checkHasPassword);
 
         $(document).ready(checkHasPassword);
-            
+
     </script>
 }

@@ -1,4 +1,4 @@
-@{ 
+﻿@{ 
     ViewBag.Title = "myTODO - Tasks"; 
 }
 @section MainContent {
@@ -42,8 +42,8 @@
     <script type="text/javascript" src="@(Url.Content("~/Content/scripts/jquery.checkbox.min.js"))"></script>
     <script type="text/javascript" src="@(Url.Content("~/Content/scripts/services.tasks.js"))"></script>
     <script type="text/javascript">
-    listId = "@(ViewData["ListId"])";
-    authenticatedUser = @((bool)ViewData["AuthenticatedUser"] ? "true" : "false");
-    tasksService = new TaskServiceProxy("@(Url.Content("~/ToDo"))");
+        listId = "@(ViewData["ListId"])";
+        authenticatedUser = @((bool)ViewData["AuthenticatedUser"] ? "true" : "false");
+        tasksService = new TaskServiceProxy("@(Url.Content("~/ToDo"))");
     </script>
 }

@@ -1,4 +1,4 @@
-namespace MyTodo.WebUx.Controllers
+﻿namespace MyTodo.WebUx.Controllers
 {
     using System;
     using System.Globalization;
@@ -36,7 +36,7 @@ namespace MyTodo.WebUx.Controllers
 
         public TaskRepository TaskRepository { get; private set; }
 
-        public ActionResult LogOn()
+        public ActionResult LogIn()
         {
             return View();
         }
@@ -44,9 +44,9 @@ namespace MyTodo.WebUx.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
             Justification = "Needs to take same parameter type as Controller.Redirect()")]
-        public ActionResult LogOn(string userName, string password, bool rememberMe, string returnUrl)
+        public ActionResult LogIn(string userName, string password, bool rememberMe, string returnUrl)
         {
-            if (!this.ValidateLogOn(userName, password))
+            if (!this.ValidateLogIn(userName, password))
             {
                 return View();
             }
@@ -270,7 +270,7 @@ namespace MyTodo.WebUx.Controllers
             return ModelState.IsValid;
         }
 
-        private bool ValidateLogOn(string userName, string password)
+        private bool ValidateLogIn(string userName, string password)
         {
             if (string.IsNullOrEmpty(userName))
             {

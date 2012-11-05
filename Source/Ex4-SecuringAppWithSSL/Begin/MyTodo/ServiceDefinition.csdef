@@ -18,6 +18,5 @@
       <Setting name="DataConnectionString" />
       <Setting name="InitialListsBlobUrl" />
     </ConfigurationSettings>
-    <Certificates></Certificates>
   </WebRole>
 </ServiceDefinition>
