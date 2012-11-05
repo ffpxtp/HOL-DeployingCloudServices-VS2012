@@ -205,7 +205,7 @@ In this task, you create a service package for the myTODO application and then d
 
 	>**Note:** When you create your service model, you can specify the size of the virtual machine (VM) to which to deploy instances of your role, depending on its resource requirements. The size of the VM determines the number of CPU cores, the memory capacity, the local file system size allocated to a running instance, and the network throughput.
 
-1. To configure the storage before deploying the service, open **ServiceConfiguration.cscfg** file located in **MyTodo** service. Replace the placeholder labeled \[YOUR\_ACCOUNT\_NAME\] with the **Storage Account Name** that you chose when you configured the storage account in Task 1. Make sure to replace both instances of the placeholder, one for the _DataConnectionString_ and the second one for the _Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString_.
+1. To configure the storage before deploying the service, open **ServiceConfiguration.Cloud.cscfg** file located in **MyTodo** service. Replace the placeholder labeled \[YOUR\_ACCOUNT\_NAME\] with the **Storage Account Name** that you chose when you configured the storage account in Task 1. Make sure to replace both instances of the placeholder, one for the _DataConnectionString_ and the second one for the _Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString_.
 
 1. Next, replace the placeholder labeled \[YOUR\_ACCOUNT\_KEY\] with the **Primary Access Key** value that you recorded earlier, when you created the storage account in Task 1. Again, replace both instances of the placeholder, one for each connection string.
 
@@ -213,9 +213,9 @@ In this task, you create a service package for the myTODO application and then d
 
 	_Configuring the storage account connection strings_
 
-1. Now, define the version of the Windows Azure Guest Operating System that should run your service on the virtual machine. To do this, double-click the **ServiceConfiguration.cscfg** file in the **MyTodo** project to open this file in the XML editor. Now, add an **osVersion** attribute to the **ServiceConfiguration** root element and set its value to _WA-GUEST-OS-1.20_201208-02_, as shown in the figure below.
+1. Now, set the version of the Windows Azure Guest Operating System that should run your service on the virtual machine. To do this, edit the **osVersion** attribute from the **ServiceConfiguration** root element and set its value to _WA-GUEST-OS-3.0_201208-02_, as shown in the figure below.
 
-	>**Note:** The value used for **osVersion** here is to illustrate that you can select which release of the guest OS runs your application. You may use a higher version. 
+	>**Note:** The value used for **osVersion** here is to illustrate that you can select which release of the guest OS runs your application.
 
 	![Configuring which version of the guest operating system runs the application in the VM](./Images/configuring-guestOS.png?raw=true "Configuring which version of the guest operating system runs the application in the VM")
 
@@ -233,7 +233,7 @@ In this task, you create a service package for the myTODO application and then d
 
 1. To create a service package, right-click the cloud service project and select **Package**. 
 
-1. In the **Package Windows Azure Application** dialog, click **Package** and wait until Visual Studio creates it. Once the package is ready, a window showing the folder that contains the generated files should open. Do not close this window, you will use the packages later in this task.
+1. In the **Package Windows Azure Application** dialog, ensure **Service configuration** value is set to _Cloud_. Then click **Package** and wait until Visual Studio creates it. Once the package is ready, a window showing the folder that contains the generated files should open. Do not close this window, you will use the packages later in this task.
 
 	![Creating a service package in Visual Studio](./Images/creating-a-service-package.png?raw=true "Creating a service package in Visual Studio")
 
@@ -327,7 +327,7 @@ In this task, you run the application in the staging environment and access its 
 	
 	>**Note:** In the future, you will be able to have multiple “virtual” areas, for test, QA, pre-production, etc... 
 
-1. Click **Start** to prepare the application for first time use, which requires you to create a new account. To do this, navigate to register menu.
+1. Click **Start** to prepare the application for first time use, which requires you to create a new account.
 
 	![Application running in the staging environment](./Images/application-running-staging.png?raw=true "Application running in the staging environment")
 
@@ -452,6 +452,8 @@ In this task, you will configure the application using your Storage account info
 1. If it is not already open, launch **Microsoft Visual Studio Express 2012 for Web** (or later) as Administrator.
 
 1. In the **File** menu, choose **Open Project** and browse to **Ex2-DeployingWithPowerShell\Begin** in the **Source** folder of the lab. Select **MyTodo.sln** and click Open.
+
+	> **Note:** Alternatively, you may continue with the solution that you completed during Exercise 1.
 
 1. Configure the storage account connection strings. To do this, expand the **Roles** node in the **MyTodo** project and double-click the **MyTodo.WebUX** role. In the role properties window, select the **Settings** tab, select the _DataConnectionString_ setting, ensure that the **Type** is set to Connection String, and then click the button labeled with an ellipsis.
 

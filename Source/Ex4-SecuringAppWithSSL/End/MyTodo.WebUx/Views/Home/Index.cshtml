@@ -1,4 +1,4 @@
-@model IEnumerable<MyTodo.WebUx.Models.TaskList>
+﻿@model IEnumerable<MyTodo.WebUx.Models.TaskList>
 @{ 
     ViewBag.Title = "myTODO"; 
 }
@@ -25,7 +25,7 @@
         }
         else
         {
-            <span>@(Html.ActionLink("Log On", "LogOn", "Account"))
+            <span>@(Html.ActionLink("Log In", "LogIn", "Account"))
                 to create new lists</span>
         }
     </div>

@@ -1156,7 +1156,7 @@ namespace Microsoft.Samples.ServiceHosting.AspProviders
                                                now.ToLocalTime(),
                                                Configuration.MinSupportedDateTime);
             }
-            catch (InvalidOperationException ex) 
+            catch (InvalidOperationException ex)
             {
                 if (ex.InnerException is DataServiceClientException && (ex.InnerException as DataServiceClientException).StatusCode == (int)HttpStatusCode.Conflict)
                 {

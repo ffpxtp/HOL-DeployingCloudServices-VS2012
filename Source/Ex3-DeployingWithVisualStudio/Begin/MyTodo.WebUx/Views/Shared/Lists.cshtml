@@ -1,4 +1,4 @@
-@model MyTodo.WebUx.Models.TaskList
+﻿@model MyTodo.WebUx.Models.TaskList
 @{ 
     ViewBag.Title = "myTODO - Lists"; 
 }
@@ -36,7 +36,7 @@
     <script type="text/javascript" src="@(Url.Content("~/Content/scripts/page.lists.js"))"></script>
     <script type="text/javascript" src="@(Url.Content("~/Content/scripts/services.lists.js"))"></script>
     <script type="text/javascript">
-    authenticatedUser = @(Request.IsAuthenticated.ToString().ToLower());
-    listsService = new ListServiceProxy("@(Url.Content("~/ToDo"))");
+        authenticatedUser = @(Request.IsAuthenticated.ToString().ToLower());
+        listsService = new ListServiceProxy("@(Url.Content("~/ToDo"))");
     </script>
 }

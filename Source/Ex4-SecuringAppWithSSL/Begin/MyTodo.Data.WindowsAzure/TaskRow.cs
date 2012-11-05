@@ -1,4 +1,4 @@
-// ----------------------------------------------------------------------------------
+﻿// ----------------------------------------------------------------------------------
 // Microsoft Developer & Platform Evangelism
 // 
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -24,22 +24,22 @@ namespace MyTodo.Data.WindowsAzure
         public TaskRow()
         {
         }
-        
-        public TaskRow(string partitionKey, string rowKey) 
+
+        public TaskRow(string partitionKey, string rowKey)
             : base(partitionKey, rowKey)
         {
         }
 
         public string TaskId { get; set; }
-        
+
         public string ListId { get; set; }
-        
+
         public string Subject { get; set; }
-        
+
         public DateTime StartDate { get; set; }
-        
+
         public DateTime DueDate { get; set; }
-        
+
         public bool IsComplete { get; set; }
     }
 }

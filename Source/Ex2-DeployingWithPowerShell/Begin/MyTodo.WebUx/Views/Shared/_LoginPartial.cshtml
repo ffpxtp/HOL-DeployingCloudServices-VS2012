@@ -3,9 +3,9 @@
     <text>Welcome <b>@(Html.Encode(User.Identity.Name))</b>! |
     @(Html.ActionLink("Profile", "Profile", "Account"))
     |
-    @(Html.ActionLink("Sign Out", "LogOff", "Account"))</text>
+    @(Html.ActionLink("Log Off", "LogOff", "Account"))</text>
 }
 else
 {
-    @(Html.ActionLink("Sign In", "LogOn", "Account"))
+    @(Html.ActionLink("Log In", "LogIn", "Account"))
 }

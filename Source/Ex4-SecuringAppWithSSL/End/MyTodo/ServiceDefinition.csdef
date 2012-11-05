@@ -18,6 +18,8 @@
       <Setting name="DataConnectionString" />
       <Setting name="InitialListsBlobUrl" />
     </ConfigurationSettings>
+    <LocalResources>
+    </LocalResources>
     <Certificates>
       <Certificate name="SSL" storeLocation="LocalMachine" storeName="My" />
     </Certificates>

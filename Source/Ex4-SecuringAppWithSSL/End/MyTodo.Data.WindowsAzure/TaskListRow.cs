@@ -1,4 +1,4 @@
-// ----------------------------------------------------------------------------------
+﻿// ----------------------------------------------------------------------------------
 // Microsoft Developer & Platform Evangelism
 // 
 // Copyright (c) Microsoft Corporation. All rights reserved.
@@ -23,7 +23,7 @@ namespace MyTodo.Data.WindowsAzure
         public TaskListRow()
         {
         }
-        
+
         public TaskListRow(string partitionKey, string rowKey)
             : base(partitionKey, rowKey)
         {
